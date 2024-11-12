@@ -6,15 +6,15 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 14:22:56 by lemarian          #+#    #+#             */
-/*   Updated: 2024/11/09 18:03:24 by lemarian         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:19:23 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long int	get_time(void)
+size_t	get_time(void)
 {
-	long int	time;
+	size_t	time;
 	struct timeval	curr;
 
 	time = 0;
@@ -23,20 +23,38 @@ long int	get_time(void)
 	return (time);
 }
 
-int	check_dead(t_philo *ph)
+void	ft_usleep(size_t time, t_arg *arg)
 {
-	if (ph->dead == 1)
+	size_t	start;
+
+	if (arg->finish == 1)
+		usleep(100);
+	start = get_time();
+	while ((get_time() - start) < time)
+		usleep(time / 10);
+}
+
+int	check_finish(t_philo *ph)
+{
+	pthread_mutex_lock(&ph->arg->dead);
+	if (ph->arg->finish == 1)
+	{
+		pthread_mutex_unlock(&ph->arg->dead);
 		return (0);
-	if (ph->arg->done == 1)
-		return (0);
+	}
+	pthread_mutex_unlock(&ph->arg->dead);
 	return (1);
 }
 
 void	mutex_print(char *message, t_philo *ph)
 {
-	if (!check_dead(ph))
+	size_t	time;
+
+	if (check_finish(ph) == 0)
 		return;
+	time = get_time();
+	ft_usleep(2, ph->arg);
 	pthread_mutex_lock(&ph->arg->write);
-	printf("%ld %d %s\n", get_time(), ph->id, message);
+	printf("%zu %d %s\n", time, ph->id, message);
 	pthread_mutex_unlock(&ph->arg->write);
 }

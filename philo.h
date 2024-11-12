@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 13:38:24 by lemarian          #+#    #+#             */
-/*   Updated: 2024/11/09 15:16:57 by lemarian         ###   ########.fr       */
+/*   Created: 2024/11/11 14:53:14 by lemarian          #+#    #+#             */
+/*   Updated: 2024/11/12 16:13:13 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,41 +19,41 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <string.h>
+# include <stdbool.h>
 
 typedef struct s_arg
 {
-	int				size;
-	long int		death_t;
-	long int		eat_t;
-	long int		sleep_t;
-	int				max_meal;
-	int				done;
+	int	size;
+	size_t	death_t;
+	size_t	eat_t;
+	size_t	sleep_t;
+	int		max_meal;
 
 	pthread_mutex_t	write;
 	pthread_mutex_t	dead;
+	int		finish;
 }	t_arg;
 
 typedef struct s_philo
 {
-	int				id;
-	pthread_t		thread;
-	pthread_t		monitor;
+	int	id;
+	pthread_t	thread;
+	pthread_t	monitor;
 
 	pthread_mutex_t	r_fork;
 	pthread_mutex_t	*l_fork;
 
-	t_arg			*arg;
-	int				meals;
-	int				dead;
-	pthread_mutex_t	death;
-
 	pthread_mutex_t	eating;
-	long int		last_meal;
+	size_t	last_meal;
+	int	meals;
+
+	t_arg	*arg;
 }	t_philo;
+
 
 typedef struct s_data
 {
-	t_philo	*phil;
+	t_philo	*ph;
 	t_arg	*arg;
 }	t_data;
 
@@ -61,8 +61,9 @@ int	check_arg(char **av);
 int	ft_atoi(const char *str);
 int	init(int ac, char **av, t_data *a);
 int	threading(t_data *a);
-int	check_dead(t_philo *ph);
-long int	get_time(void);
+size_t	get_time(void);
+void	ft_usleep(size_t time, t_arg *arg);
 void	mutex_print(char *message, t_philo *ph);
+int	check_finish(t_philo *ph);
 
 #endif

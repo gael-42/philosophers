@@ -6,7 +6,7 @@
 #    By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 16:21:22 by lemarian          #+#    #+#              #
-#    Updated: 2024/11/08 16:21:53 by lemarian         ###   ########.fr        #
+#    Updated: 2024/11/12 16:12:06 by lemarian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Werror -Wextra -g3
 
 NAME = philo
 
-SRCS = main.c parsing.c init.c threads.c utils.c
+SRCS = main.c parsing.c init.c thread_2.c utils.c
 
 OBJS = $(SRCS:.c=.o)
 
