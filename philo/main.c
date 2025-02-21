@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 13:40:25 by lemarian          #+#    #+#             */
-/*   Updated: 2024/11/11 15:18:32 by lemarian         ###   ########.fr       */
+/*   Created: 2025/02/11 15:51:18 by lemarian          #+#    #+#             */
+/*   Updated: 2025/02/18 14:05:35 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 int	main(int ac, char **av)
 {
-	t_data	a;
+	t_arg	arg;
+	t_philo	*phil;
 
+	phil = NULL;
 	if (!check_arg(av))
 		return (1);
-	if (!init(ac, av, &a))
+	phil = init(ac, av, &arg, phil);
+	if (!phil)
 		return (1);
-	if (!threading(&a))
-		return (1);
-	free(a.ph);
-	free(a.arg);
+	if (!threading(&arg, phil))
+		return (free(phil), 1);
+	free(phil);
 	return (0);
-}//need to free a.phil
+}

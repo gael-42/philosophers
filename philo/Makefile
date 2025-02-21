@@ -5,18 +5,18 @@
 #                                                     +:+ +:+         +:+      #
 #    By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/08 16:21:22 by lemarian          #+#    #+#              #
-#    Updated: 2024/11/12 16:12:06 by lemarian         ###   ########.fr        #
+#    Created: 2025/02/11 15:50:47 by lemarian          #+#    #+#              #
+#    Updated: 2025/02/21 15:02:49 by lemarian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=thread -g
 
 NAME = philo
 
-SRCS = main.c parsing.c init.c thread_2.c utils.c
+SRCS = main.c parsing.c init.c utils.c threads.c routine.c
 
 OBJS = $(SRCS:.c=.o)
 
