@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:59:48 by lemarian          #+#    #+#             */
-/*   Updated: 2025/02/18 14:07:24 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:37:23 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_usleep(size_t time, t_philo *ph)
 	start = get_time();
 	while ((get_time() - start) < time)
 	{	
-		if (ph->arg->finish == false)
+		if (check_finish(ph))
 			usleep(time / 1000);
 		else
 			return ;
@@ -41,7 +41,7 @@ void	mutex_print(char *message, t_philo *ph)
 {
 	size_t	time;
 
-	if (ph->arg->finish == true)
+	if (!check_finish(ph))
 		return ;
 	time = get_time() - ph->arg->start_t;
 	pthread_mutex_lock(&ph->arg->print);

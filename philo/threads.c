@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:38:17 by lemarian          #+#    #+#             */
-/*   Updated: 2025/02/21 15:11:12 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:38:57 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	*monitor(void *arg)
 	ft_usleep(ph->arg->death_t, ph);
 	while (1)
 	{
-		if (ph->arg->finish == true || ph->meals == ph->arg->max_meal)//data race here?
+		if (!check_finish(ph) || !check_max_meals(ph))
 			return (NULL);
-		if (get_time() - ph->last_meal >= ph->arg->death_t)
+		if (!check_last_meal(ph))
 		{
 			pthread_mutex_lock(&ph->arg->dying);
 			ph->arg->finish = true;
 			ph->arg->corpses++;
 			pthread_mutex_unlock(&ph->arg->dying);
-			if (ph->arg->corpses < 2)
+			if (check_corpses(ph))
 			{
 				pthread_mutex_lock(&ph->arg->print);
 				printf("%ld %d has died\n", get_time() - ph->arg->start_t, ph->id);//too long
@@ -46,13 +46,21 @@ void	*start(void *arg)
 	ph = (t_philo *)arg;
 	if (ph->id % 2 != 0)
 		ft_usleep(ph->arg->eat_t / 2, ph);
-	while (ph->arg->finish == false)
+	while (check_finish(ph))
 	{
-		if (!eating(ph))
-			break ;
+		if (ph->id % 2 == 0)
+		{
+			if (!eating_even(ph))
+				break ;
+		}
+		else
+		{
+			if (!eating_odd(ph))
+				break ;
+		}
 		if (!sleeping(ph))
 			break ;
-		if (ph->arg->max_meal != -1 && ph->meals == ph->arg->max_meal)
+		if (ph->arg->max_meal != -1 && !check_max_meals(ph))
 			return (NULL);
 	}
 	return (NULL);

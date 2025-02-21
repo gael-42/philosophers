@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:51:04 by lemarian          #+#    #+#             */
-/*   Updated: 2025/02/21 15:19:00 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:37:56 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_arg
 
 	pthread_mutex_t	print;
 	pthread_mutex_t	dying;
-	int				corpses;//dying
-	bool			finish;//dying
+	int				corpses;
+	bool			finish;
 }	t_arg;
 
 typedef struct s_philo
@@ -43,12 +43,12 @@ typedef struct s_philo
 	pthread_t		thread;
 	pthread_t		monitor;
 
-	pthread_mutex_t	r_fork;//this
-	pthread_mutex_t	*l_fork;//this
+	pthread_mutex_t	r_fork;
+	pthread_mutex_t	*l_fork;
 
 	pthread_mutex_t	eating;
-	size_t			last_meal;//eating
-	int				meals;//eating
+	size_t			last_meal;
+	int				meals;
 
 	t_arg			*arg;
 }	t_philo;
@@ -61,5 +61,10 @@ int		threading(t_arg *arg, t_philo *phil);
 void	ft_usleep(size_t time, t_philo *ph);
 void	mutex_print(char *message, t_philo *ph);
 int		sleeping(t_philo *ph);
-int		eating(t_philo *ph);
+int		eating_even(t_philo *ph);
+int		eating_odd(t_philo *ph);
+int		check_finish(t_philo *ph);
+int		check_max_meals(t_philo *ph);
+int		check_last_meal(t_philo *ph);
+int		check_corpses(t_philo *ph);
 #endif
