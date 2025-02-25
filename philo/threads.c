@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:38:17 by lemarian          #+#    #+#             */
-/*   Updated: 2025/02/24 16:41:08 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:28:10 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*monitor(void *arg)
 			if (ph->arg->corpses < 2)
 			{
 				pthread_mutex_lock(&ph->arg->print);
-				printf("%ld %d has died\n", get_time() - start, ph->id);
+				printf("%ld %d died\n", get_time() - start, ph->id);
 				pthread_mutex_unlock(&ph->arg->print);
 			}
 			pthread_mutex_unlock(&ph->arg->dying);

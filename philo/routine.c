@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:07:59 by lemarian          #+#    #+#             */
-/*   Updated: 2025/02/24 16:12:48 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:28:00 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	eating_even(t_philo *ph)
 	if (!check_finish(ph))
 		return (0);
 	pthread_mutex_lock(&ph->r_fork);
-	mutex_print("has picked up a fork", ph);
+	mutex_print("has taken a fork", ph);
 	pthread_mutex_lock(ph->l_fork);
-	mutex_print("has picked up a fork", ph);
+	mutex_print("has taken a fork", ph);
 	pthread_mutex_lock(&ph->eating);
 	ph->last_meal = get_time();
 	ph->meals++;
@@ -36,9 +36,9 @@ int	eating_odd(t_philo *ph)
 	if (!check_finish(ph))
 		return (0);
 	pthread_mutex_lock(ph->l_fork);
-	mutex_print("has picked up a fork", ph);
+	mutex_print("has taken a fork", ph);
 	pthread_mutex_lock(&ph->r_fork);
-	mutex_print("has picked up a fork", ph);
+	mutex_print("has taken a fork", ph);
 	pthread_mutex_lock(&ph->eating);
 	ph->last_meal = get_time();
 	ph->meals++;
@@ -68,7 +68,7 @@ void	*one_philo(void *arg)
 	pthread_mutex_lock(&ph->r_fork);
 	mutex_print("has taken a fork", ph);
 	ft_usleep(ph->arg->death_t, ph);
-	mutex_print("has died", ph);
+	mutex_print("died", ph);
 	pthread_mutex_unlock(&ph->r_fork);
 	return (NULL);
 }

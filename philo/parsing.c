@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:57:39 by lemarian          #+#    #+#             */
-/*   Updated: 2025/02/18 14:07:01 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:25:32 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_arg(char **av)
 	{
 		if (!check_is_num(av[i]))
 		{
-			printf("Arguments can only be positive numbers\n");
+			printf("Arguments can only be positive whole numbers\n");
 			return (0);
 		}
 		if (i == 1 && mini_atoi(av[i]) > 200)
