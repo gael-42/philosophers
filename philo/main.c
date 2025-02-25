@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:51:18 by lemarian          #+#    #+#             */
-/*   Updated: 2025/02/24 16:37:36 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:00:06 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	main(int ac, char **av)
 	t_philo	*phil;
 
 	phil = NULL;
+	if (ac != 5 && ac != 6)
+		return (print_error("Wrong number of arguments"), 1);
 	if (!check_arg(av))
 		return (1);
 	phil = init(ac, av, &arg, phil);
