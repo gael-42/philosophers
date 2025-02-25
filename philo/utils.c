@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:59:48 by lemarian          #+#    #+#             */
-/*   Updated: 2025/02/21 16:37:23 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:38:34 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,15 @@ void	mutex_print(char *message, t_philo *ph)
 	pthread_mutex_lock(&ph->arg->print);
 	printf("%zu %d %s\n", time, ph->id, message);
 	pthread_mutex_unlock(&ph->arg->print);
+}
+
+void	print_error(char *error)
+{
+	int	i;
+
+	i = 0;
+	write(1, "Error: ", 7);
+	while (error[i])
+		write(1, &error[i++], 1);
+	write(1, "\n", 1);
 }

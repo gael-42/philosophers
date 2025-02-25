@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 16:36:58 by lemarian          #+#    #+#             */
-/*   Updated: 2025/02/21 17:53:12 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:41:30 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,6 @@ int	check_finish(t_philo *ph)
 	result = 1;
 	pthread_mutex_lock(&ph->arg->dying);
 	if (ph->arg->finish == true)
-		result = 0;
-	pthread_mutex_unlock(&ph->arg->dying);
-	return (result);
-}
-
-int	check_corpses(t_philo *ph)
-{
-	int	result;
-
-	result = 1;
-	pthread_mutex_lock(&ph->arg->dying);
-	if (ph->arg->corpses >= 2)//why 2?
 		result = 0;
 	pthread_mutex_unlock(&ph->arg->dying);
 	return (result);

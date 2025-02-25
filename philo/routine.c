@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:07:59 by lemarian          #+#    #+#             */
-/*   Updated: 2025/02/21 16:31:57 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:12:48 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,17 @@ int	sleeping(t_philo *ph)
 	ft_usleep(ph->arg->sleep_t, ph);
 	mutex_print("is thinking", ph);
 	return (1);
+}
+
+void	*one_philo(void *arg)
+{
+	t_philo	*ph;
+
+	ph = (t_philo *)arg;
+	pthread_mutex_lock(&ph->r_fork);
+	mutex_print("has taken a fork", ph);
+	ft_usleep(ph->arg->death_t, ph);
+	mutex_print("has died", ph);
+	pthread_mutex_unlock(&ph->r_fork);
+	return (NULL);
 }

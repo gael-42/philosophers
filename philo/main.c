@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:51:18 by lemarian          #+#    #+#             */
-/*   Updated: 2025/02/18 14:05:35 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:37:36 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@ int	main(int ac, char **av)
 	phil = init(ac, av, &arg, phil);
 	if (!phil)
 		return (1);
-	if (!threading(&arg, phil))
+	if (arg.size == 1)
+	{	
+		if (!create_one_thread(phil))
+			return (1);
+	}
+	else if (!threading(&arg, phil))
 		return (free(phil), 1);
 	free(phil);
 	return (0);

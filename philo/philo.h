@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:51:04 by lemarian          #+#    #+#             */
-/*   Updated: 2025/02/21 16:37:56 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:41:43 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ int		eating_odd(t_philo *ph);
 int		check_finish(t_philo *ph);
 int		check_max_meals(t_philo *ph);
 int		check_last_meal(t_philo *ph);
-int		check_corpses(t_philo *ph);
+void	*one_philo(void *arg);
+void	print_error(char *error);
+int		create_one_thread(t_philo *phil);
 #endif
